@@ -10,6 +10,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <dlfcn.h>
+
 int process(char *arg){
     int x = 0;
     if (!strcmp(arg, "-d"))
@@ -24,6 +25,7 @@ int process(char *arg){
     }
     return x;
 }
+
 int new_client(int sock)
 {
     FILE *ERRstat;
@@ -71,7 +73,6 @@ int main(int argc, char *argv[])
     struct sockaddr_in server, client;
     int sock = socket(AF_INET, SOCK_STREAM, 0); // создание сокета
     
-    
     // структура для сервера
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY; // 0.0.0.0
@@ -87,11 +88,4 @@ int main(int argc, char *argv[])
     }
     
     close(sock);
-    
-    //ждем завершения потока
-    
-    //создаем поток по идентификатору thread и функции потока threadFunc
-    //и передаем потоку указатель на данные thread_data
-    
-    
 }
