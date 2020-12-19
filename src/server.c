@@ -41,7 +41,6 @@ int new_client(int sock)
         fputs (dlerror(), stderr);
         exit(-1);
     }
-    
 
     printf("New client: %s\n",inet_ntoa(client.sin_addr));
     while((size = recv(newsock, buf, sizeof(buf), 0)) != 0)
@@ -72,6 +71,7 @@ int main(int argc, char *argv[])
 {
     struct sockaddr_in server, client;
     int sock = socket(AF_INET, SOCK_STREAM, 0); // создание сокета
+    
     
     // структура для сервера
     server.sin_family = AF_INET;

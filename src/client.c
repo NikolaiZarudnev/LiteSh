@@ -11,17 +11,21 @@
 
 int main(int argc, char *argv[])
 {
-    struct sockaddr_in server; // структура для сокета
+    struct sockaddr_in server;                  // структура для сокета
     server.sin_family = AF_INET;
     server.sin_port = htons(2019);
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
+
     int sock = socket(AF_INET, SOCK_STREAM, 0); // создаем сокет
-    connect(sock, &server, sizeof(server)); // соединяемся с сервером
-    send(sock, argv[1], 6, 0); // отправка сообщения
+    connect(sock, &server, sizeof(server));     // соединяемся с сервером
+    send(sock, argv[1], 6, 0);                  // отправка сообщения на сервер
+
     char buf[255] = "";
     int x = 0;
-    recv(sock, &x, sizeof(x), 0);
+    recv(sock, &x, sizeof(x), 0);               // прием ответа от сервера
+
     printf("Server sent: %d\n", x);
+
     close(sock);
 }
    
