@@ -11,7 +11,7 @@
 #include <pthread.h>
 #include <dlfcn.h>
 #include <signal.h>
-#define STDOUT 1
+
 int signalhandler(int sig)
 {
 	switch (sig)

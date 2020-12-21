@@ -11,11 +11,11 @@
 
 int main(int argc, char *argv[])
 {
-    // структура для сокета
-    struct sockaddr_in server;
+    struct sockaddr_in server;                  // структура для сокета
     server.sin_family = AF_INET;
     server.sin_port = htons(2019);
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
+
     int sock = socket(AF_INET, SOCK_STREAM, 0); // создаем сокет
     connect(sock, &server, sizeof(server)); // соединяемся с сервером
     // отправка сообщения

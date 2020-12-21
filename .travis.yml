@@ -6,3 +6,4 @@ dist: xenial
 
 script: 
   - make
+  
