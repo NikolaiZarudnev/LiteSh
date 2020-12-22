@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     {
         strcpy(command[i+1], "\0");
         strcpy(command[i], argv[i]);
+        printf("%s\n", command[i]);
     }
     
     //printf("%s\n", argv[1]);
