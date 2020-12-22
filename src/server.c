@@ -114,24 +114,28 @@ int new_client(int sock)
     struct sockaddr_in client;
     newsock = accept(sock, &client, &clnlen); // появление нового клиента
     char *error = "";
-    void *handle = dlopen ("/home/nikolay/Рабочий стол/OS_labs/lab6/libcookies.so", RTLD_LAZY);
+    void *handle = dlopen ("../libcookies.so", RTLD_LAZY);
     if (!handle) {
+        printf("cookieerr\n");
         fputs (dlerror(), stderr);
         exit(-1);
     }
-
+    int flag_help = 0;
     printf("New client: %s\n",inet_ntoa(client.sin_addr));
     while((size = recv(newsock, buf, sizeof(buf), 0)) != 0)
     {
         printf("buffer: %s\n", buf[1]);
+        printf("asdqwe\n");
         if(!strcmp(buf[1], "-h") || !strcmp(buf[1], "--help")) {
+            printf("asd12\n");
+            flag_help = 1;
             strcpy(send_toclient, "Авторы: Заруднев Николай, Каширин Владислав, Бесаева Далия\nДоступные аргументы:\n\t-r: переместить файл\n\t-c: копировать файл\n\t-d: удалить файл\n\t-s: общий размер указанной директории или файла\n\t-f: отображение всех файлов указанной директории\n\t-p: отображение всех процессов из файловой системы procf\nУправление файловой системой\n./client --help/-h\n./client --delete/-d 'filename'\n./client --replace/-r 'sourcefilename' 'todir'\n./client --copy/-c 'sourcefilename' 'todir'\n./client --size/-s 'dir'\n./client --list/-l 'dir'\n./client --procfs/-p");
-            continue;
         }
+        printf("wh\n");
         if (buf == NULL) //Если флаги не введены
         {
             printf("Error: Server recieved NULL\n");
-            return 0;
+            strcpy(send_toclient, "Error: Server recieved NULL\n");
             //Ловим сигналы Нибиру
         }
         else if (valid_fileManage_flag(buf[1])) //Если флаг совпадает с флагами из лаб. 2
@@ -142,12 +146,13 @@ int new_client(int sock)
         {
             background_process(buf[2], buf[3], buf[4], buf[5]);
         }
-        else //Если процесс нужно запустить НЕ в фоне
+        else if(flag_help) //Если процесс нужно запустить НЕ в фоне
         {
+            printf("asd11\n");
             create_pr_name(buf[1], buf[2], buf[3], buf[4]);
         }
-        send(newsock, send_toclient, sizeof(send_toclient), 0); // отправляем эхо
-
+        //send(newsock, send_toclient, sizeof(send_toclient), 0); // отправляем эхо
+        printf("asd\n");
         void (*world)() = dlsym(handle, "cookie");
         if ((error = dlerror()) != NULL) {
             ERRstat = fopen("ERRORS.txt", "a+");
@@ -156,8 +161,8 @@ int new_client(int sock)
             exit(-1);
         }
         (*world)();
-        //x = 100;
         dlclose(handle);
+        printf("asdqqq\n");
         send(newsock, send_toclient, sizeof(send_toclient), 0); // отправляем эхо
     } // пока получаем от клиента
     close(newsock);
