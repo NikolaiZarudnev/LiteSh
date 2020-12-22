@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y make gcc
 
 WORKDIR /app
 
+ADD ./ /app
+
 RUN make
 
 EXPOSE 2019
