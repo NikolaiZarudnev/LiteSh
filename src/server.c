@@ -114,7 +114,7 @@ int new_client(int sock)
     struct sockaddr_in client;
     newsock = accept(sock, &client, &clnlen); // появление нового клиента
     char *error = "";
-    void *handle = dlopen ("libcookies.so", RTLD_LAZY);
+    void *handle = dlopen ("./libcookies.so", RTLD_LAZY);
     if (!handle) {
         printf("cookie err\n");
         fputs (dlerror(), stderr);
