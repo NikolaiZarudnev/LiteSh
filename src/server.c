@@ -144,7 +144,7 @@ int new_client(int sock)
         {
             background_process(buf[2], buf[3], buf[4], buf[5]);
         }
-        else if(flag_help) //Если процесс нужно запустить НЕ в фоне
+        else if(!flag_help) //Если процесс нужно запустить НЕ в фоне
         {
             create_pr_name(buf[1], buf[2], buf[3], buf[4]);
         }

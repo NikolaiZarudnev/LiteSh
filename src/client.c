@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     }
     
     //printf("%s\n", argv[1]);
-    printf("%d\n", sizeof(command));
+    //printf("%d\n", sizeof(command));
     send(sock, command, sizeof(command), 0);
     char buf[1024];
     int x = 0;
