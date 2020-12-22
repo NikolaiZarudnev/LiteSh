@@ -11,3 +11,5 @@ ADD ./ /app
 RUN make
 
 EXPOSE 2019
+
+ENTRYPOINT ./bin/LiteSH

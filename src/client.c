@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
     {
         strcpy(command[i+1], "\0");
         strcpy(command[i], argv[i]);
-        printf("%s\n", command[i]);
     }
     
     //printf("%s\n", argv[1]);
+    printf("%d\n", sizeof(command));
     send(sock, command, sizeof(command), 0);
     char buf[1024];
     int x = 0;

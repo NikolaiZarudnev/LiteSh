@@ -125,6 +125,7 @@ int new_client(int sock)
     while((size = recv(newsock, buf, sizeof(buf), 0)) != 0)
     {
         printf("buffer: %s\n", buf[1]);
+        printf("%d\n", sizeof(buf));
         if(!strcmp(buf[1], "-h") || !strcmp(buf[1], "--help")) {
             flag_help = 1;
             strcpy(send_toclient, "Авторы: Заруднев Николай, Каширин Владислав, Бесаева Далия\nДоступные аргументы:\n\t-r: переместить файл\n\t-c: копировать файл\n\t-d: удалить файл\n\t-s: общий размер указанной директории или файла\n\t-f: отображение всех файлов указанной директории\n\t-p: отображение всех процессов из файловой системы procf\nУправление файловой системой\n./client --help/-h\n./client --delete/-d 'filename'\n./client --replace/-r 'sourcefilename' 'todir'\n./client --copy/-c 'sourcefilename' 'todir'\n./client --size/-s 'dir'\n./client --list/-l 'dir'\n./client --procfs/-p");
